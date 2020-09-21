@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  imported:
+    image: busybox
+    command: top
+    healthcheck:
+      test: "/bin/true"
+      interval: 1s
+      timeout: 30m
+      retries: 1

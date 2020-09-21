@@ -3034,3 +3034,32 @@ services:
         another = self.project.get_service('--log-service')
         assert len(service.containers()) == 1
         assert len(another.containers()) == 1
+
+    def test_import(self):
+        self.base_dir = 'tests/fixtures/import'
+        result = self.dispatch(['config'])
+        assert yaml.safe_load(result.stdout) == {
+            'version': '3',
+            'services': {
+                'root': {
+                    'image': 'busybox',
+                    'command': 'top',
+                    'healthcheck': {
+                        'test': '/bin/true',
+                        'interval': '1s',
+                        'timeout': '30m',
+                        'retries': 1,
+                    },
+                },
+                'imported': {
+                    'image': 'busybox',
+                    'command': 'top',
+                    'healthcheck': {
+                        'test': '/bin/true',
+                        'interval': '1s',
+                        'timeout': '30m',
+                        'retries': 1,
+                    },
+                },
+            },
+        }

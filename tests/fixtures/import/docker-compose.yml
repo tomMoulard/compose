@@ -1,0 +1,14 @@
+version: "3"
+
+# import:
+    # - "sample/docker-compose.yml"
+
+services:
+  root:
+    image: busybox
+    command: top
+    healthcheck:
+      test: "/bin/true"
+      interval: 1s
+      timeout: 30m
+      retries: 1
