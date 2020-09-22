@@ -57,6 +57,16 @@
         }
       },
       "additionalProperties": false
+    },
+    "import": {
+      "id": "#/properties/import",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9._-]+$": {
+          "$ref": "#/definitions/import"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "patternProperties": {"^x-": {}},
