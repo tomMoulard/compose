@@ -34,6 +34,7 @@ def build_config(**kwargs):
         networks=kwargs.get('networks'),
         secrets=kwargs.get('secrets'),
         configs=kwargs.get('configs'),
+        imports=kwargs.get('imports'),
     )
 
 
@@ -60,6 +61,7 @@ class ProjectTest(unittest.TestCase):
             volumes=None,
             secrets=None,
             configs=None,
+            imports=None,
         )
         project = Project.from_config(
             name='composetest',
@@ -90,6 +92,7 @@ class ProjectTest(unittest.TestCase):
             volumes=None,
             secrets=None,
             configs=None,
+            imports=None,
         )
         project = Project.from_config('composetest', config, None)
         assert len(project.services) == 2
@@ -191,6 +194,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         assert project.get_service('test')._get_volumes_from() == [container_id + ":rw"]
@@ -224,6 +228,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         assert project.get_service('test')._get_volumes_from() == [container_name + ":rw"]
@@ -251,6 +256,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         with mock.patch.object(Service, 'containers') as mock_return:
@@ -556,6 +562,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         service = project.get_service('test')
@@ -581,6 +588,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         service = project.get_service('test')
@@ -615,6 +623,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
 
@@ -636,6 +645,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
 
@@ -657,6 +667,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
 
@@ -688,6 +699,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         assert [c.id for c in project.containers()] == ['1']
@@ -705,6 +717,7 @@ class ProjectTest(unittest.TestCase):
                 volumes={'data': {}},
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
         self.mock_client.remove_network.side_effect = NotFound(None, None, 'oops')
@@ -747,7 +760,12 @@ class ProjectTest(unittest.TestCase):
             'image': BUSYBOX_IMAGE_WITH_TAG,
         }
         config_data = build_config(
-            services=[service_config], networks={}, volumes={}, secrets=None, configs=None
+            services=[service_config],
+            networks={},
+            volumes={},
+            secrets=None,
+            configs=None,
+            imports=None
         )
 
         project = Project.from_config(name='test', client=self.mock_client, config_data=config_data)
@@ -773,7 +791,7 @@ class ProjectTest(unittest.TestCase):
                 {'name': 'web', 'image': BUSYBOX_IMAGE_WITH_TAG},
                 {'name': 'db', 'image': BUSYBOX_IMAGE_WITH_TAG, 'stop_grace_period': '1s'},
             ],
-            networks={}, volumes={}, secrets=None, configs=None,
+            networks={}, volumes={}, secrets=None, configs=None, imports=None
         )
 
         project = Project.from_config(name='test', client=self.mock_client, config_data=config_data)
@@ -808,6 +826,7 @@ class ProjectTest(unittest.TestCase):
                 volumes=None,
                 secrets=None,
                 configs=None,
+                imports=None,
             ),
         )
 
