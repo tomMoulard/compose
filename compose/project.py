@@ -68,12 +68,20 @@ class Project:
     """
     A collection of services.
     """
-    def __init__(self, name, services, client, networks=None, volumes=None, config_version=None):
+    def __init__(self,
+                 name,
+                 services,
+                 client,
+                 networks=None,
+                 volumes=None,
+                 config_version=None,
+                 imports=None):
         self.name = name
         self.services = services
         self.client = client
         self.volumes = volumes or ProjectVolumes({})
         self.networks = networks or ProjectNetworks({}, False)
+        self.imports = imports
         self.config_version = config_version
 
     def labels(self, one_off=OneOffFilter.exclude, legacy=False):
