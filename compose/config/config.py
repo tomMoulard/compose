@@ -588,7 +588,7 @@ def process_config_file(config_file, environment, service_name=None, interpolate
         )
         processed_config['import'] = process_config_section(
             config_file,
-            config_file.get_configs(),
+            config_file.get_import(),
             'import',
             environment,
             interpolate,
