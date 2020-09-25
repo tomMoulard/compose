@@ -1,7 +1,8 @@
 version: "3"
 
 import:
-    sample: "sample/docker-compose.yml"
+    sample:
+        file: "sample/docker-compose.yml"
 
 services:
   root:

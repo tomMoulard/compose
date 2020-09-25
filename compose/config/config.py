@@ -411,7 +411,6 @@ def load(config_details, interpolate=True):
             match_named_volumes(service_dict, volumes)
 
     version = main_file.version
-
     return Config(version, service_dicts, volumes, networks, secrets, configs, imports)
 
 
